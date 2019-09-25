@@ -5,6 +5,8 @@
 <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="bower_components/paper-button/paper-button.html">
 <link rel="import" href="bower_components/polymer/lib/utils/gestures.html">
+<link rel="import" href="bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="bower_components/polymer/lib/utils/array-splice.html">
 <dom-module id="simple-app">
   <template>
     <style>
@@ -16,15 +18,24 @@
     <paper-input  label="Username" no-label-float value="{{username}}"></paper-input>
     <paper-input type="password"  label="password" no-label-float value="{{password}}"></paper-input>
     <paper-input type="password"  label="Re enter password" no-label-float  value="{{repassword}}"></paper-input>
-    <paper-dropdown-menu label="User Type">
-      <paper-listbox slot="dropdown-content" selected="{{userType}}" on-change="">
-        <paper-item>Admin</paper-item>
-        <paper-item>Employee</paper-item>
-        <paper-item>Customer</paper-item>
-        <paper-item>Management</paper-item>
+    <paper-dropdown-menu label="User Type" no-label-float>
+      <paper-listbox slot="dropdown-content" selected="{{userType.value}}" on-change="">
+        <paper-item value="Admin">Admin</paper-item>
+        <paper-item value="Employee">Employee</paper-item>
+        <paper-item value="Customer">Customer</paper-item>
+        <paper-item value="Management">Management</paper-item>
       </paper-listbox>
     </paper-dropdown-menu>
     <paper-button on-click="showData">Submit</paper-button>
+    <div> Employee list: </div>
+    <template is="dom-repeat" items="{{userData}}" as="user">
+     <p><div style="float:left;padding-right:20px">[[index]]</div>
+      <div style="float:left;padding-right:20px">[[user.username]]</div>
+      <div style="float:left;padding-right:20px">[[user.userType]]</div>
+      
+    </p><br>
+
+  </template>
   </template>
 
   <script>
@@ -63,6 +74,10 @@
           userType:{
             type:String,
             value:'Employee'
+          },
+          userData:{
+            type:Array,
+            value:[]
           }
 
         };
@@ -72,12 +87,20 @@
         console.log(this.password);
         console.log(this.repassword);
         console.log(this.userType);
+        //showdetails={};
         const showdetails ={
           username:this.username,
           password:this.password,
-          usertType:this.userType
-        }
-        console.log(this.showdetails);
+          userType:this.userType
+        };
+        //this.showdetails.username=this.username;
+        //this.showdetails.password=this.password;
+        //this.showdetails.usertType=this.usertType;
+        //console.log(showdetails);
+        this.push('userData',showdetails);
+      }
+      deleteItem(ind){
+        this.splice('userData',ind,1);
       }
     }
 
