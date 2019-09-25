@@ -1,0 +1,86 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="bower_components/paper-item/paper-item.html">
+<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/polymer/lib/utils/gestures.html">
+<dom-module id="simple-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Welcome to [[prop1]]!</h2>
+    <paper-input  label="Username"  value="{{username}}"></paper-input>
+    <paper-input  label="password" value="{{password}}"></paper-input>
+    <paper-input  label="Re enter password" value="{{repassword}}"></paper-input>
+    <paper-dropdown-menu label="User Type">
+      <paper-listbox slot="dropdown-content" selected="{{userType}}" on-change="">
+        <paper-item>Admin</paper-item>
+        <paper-item>Employee</paper-item>
+        <paper-item>Customer</paper-item>
+        <paper-item>Management</paper-item>
+      </paper-listbox>
+    </paper-dropdown-menu>
+    <paper-button on-click="showData">Submit</paper-button>
+  </template>
+
+  <script>
+    /**
+     * `simple-app`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class SimpleApp extends Polymer.Element {
+      static get is() { return 'simple-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'HCL'
+          },
+          tasks:{
+            type:Array,
+            value:["Milk","Bread","Boost","Coffe"]
+          },
+          username:{
+            type:String,
+            value:'vishnu'
+          },
+          password:{
+            type:String,
+            value:''
+          },
+          repassword:{
+            type:String,
+            value:''
+          },
+          userType:{
+            type:String,
+            value:'Employee'
+          }
+
+        };
+      }
+     showData(){
+        console.log(this.username);
+        console.log(this.password);
+        console.log(this.repassword);
+        console.log(this.userType);
+        const showdetails ={
+          username:this.username,
+          password:this.password,
+          usertType:this.userType
+        }
+        console.log(this.showdetails);
+      }
+    }
+
+    window.customElements.define(SimpleApp.is, SimpleApp);
+  </script>
+</dom-module>
