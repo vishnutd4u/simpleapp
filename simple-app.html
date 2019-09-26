@@ -19,7 +19,7 @@
     <paper-input type="password"  label="password" no-label-float value="{{password}}"></paper-input>
     <paper-input type="password"  label="Re enter password" no-label-float  value="{{repassword}}"></paper-input>
     <paper-dropdown-menu label="User Type" no-label-float>
-      <paper-listbox slot="dropdown-content" selected="selected" on-change="">
+      <paper-listbox slot="dropdown-content" selected="{{userType}}" on-change="">
         <paper-item value="Admin">Admin</paper-item>
         <paper-item value="Employee">Employee</paper-item>
         <paper-item value="Customer">Customer</paper-item>
